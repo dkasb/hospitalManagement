@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body >
+
+
+  <!-- Page Container -->
+<div id = "success">
+<div class="w3-content w3-margin-top" style="max-width:400px;">   
+        
+<form class="w3-container w3-center w3-card w3-light-grey w3-text-blue w3-margin">
+<h2 class="w3-center">Database Login</h2>
+  <div class="w3-center"><br>
+        <img src="image/hospital.jpg" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      </div>
+<div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+      <input id="host_name" class="w3-input w3-border" type="text" placeholder="Host Name" value = "localhost" autofocus>
+    </div>
+</div>
+
+<div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+      <input id="user_name" class="w3-input w3-border"  type="text" placeholder="User Name" value = "root">
+    </div>
+</div>
+
+<div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+      <input id="pass" class="w3-input w3-border"  type="password" placeholder="Password" value = "1234">
+    </div>
+</div>
+<p class="w3-center">
+<button type="button" onclick="afterClickingSubmit(event)" class="font_400 green_button w3-margin-top w3-margin-bottom w3-btn w3-left w3-round-large">Login</button>
+
+</p>
+</form>
+</div> </div> 
+</body>
+
+<script>
+
+
+                function afterClickingSubmit(event) {
+	
+	       var jsonData = {
+                        host_name: $("#host_name").val(),
+                        user_name: $("#user_name").val(),
+                        password: $("#pass").val()
+                    };
+                    event.preventDefault();
+                    $.ajax({
+                        type: "POST",
+                        url: "/DBlogin",
+                        contentType: "application/json",
+                        data: JSON.stringify(jsonData),
+                        dataType: "json",
+                        success: function(res) {
+                            
+			    console.log(res);
+                            alert('signed up. now login');
+                        },
+                        error: function(res) {
+			console.log(res.responseJSON.result)
+                            alert(res.responseJSON.result);
+                        }
+                    });
+                }
+            </script>
+
+
+</html>
